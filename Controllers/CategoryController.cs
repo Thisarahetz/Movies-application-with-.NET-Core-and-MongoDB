@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
 using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
@@ -12,10 +13,32 @@ namespace WebApplication1.Controllers
             _mongoDBservice = mongoDBservice;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
 
-            return View();
+
+            IEnumerable<Playlist> playlists = await _mongoDBservice.GetAsyncd();
+
+            Console.WriteLine("kjklsjjdjkljdkjskldj", playlists);
+
+
+            return View(playlists);
+
         }
+
+
+        // public async IActionResult Get()
+        //{
+
+        //  var resuls = await _mongoDBservice.GetAsyncd();
+        // return View();
+        // }
+
+        public async Task<IActionResult> Post(Playlist playlist)
+        {
+             await _mongoDBservice.CreateAsync(playlist);
+            return View(playlist);
+        }
+
     }
 }

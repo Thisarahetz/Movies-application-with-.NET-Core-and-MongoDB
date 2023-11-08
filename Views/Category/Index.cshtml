@@ -1,7 +1,34 @@
-﻿
+﻿@model IEnumerable<Playlist>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Category";
 }
 
-<h1>Indexx category</h1>
+<h1>Category</h1>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display order
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width="50%"> 
+                    @obj.Name
+                </td>
+                <td width="50%">
+                    @obj.Description
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
